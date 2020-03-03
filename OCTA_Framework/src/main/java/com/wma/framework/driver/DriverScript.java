@@ -222,7 +222,7 @@ public class DriverScript {
 	private List<TestRailTestCase> readTestRailtestCases(ConfigProvider config, String sTestRailFile) {
 		log.info("Reading test cases from Test Rail...");
 		String testDataFile = config.getTestDataFile().split(Pattern.quote("."))[0];
-		String testFile = config.getResultFolder() + "\\" + testDataFile + "_" + config.getTimeStamp() + ".xlsx";
+		String testFile = config.getResultFolder() + File.separator + testDataFile + "_" + config.getTimeStamp() + ".xlsx";
 		
 		List<TestRailTestCase> testCases = new ArrayList<>();
 		Map<String, String> tcMap = new HashMap<>();
@@ -297,7 +297,7 @@ public class DriverScript {
 	public Map<String, String> getAllTestClasses() {
 		Map<String, String> testClasses = new HashMap<>();
 		String fileSeparator = System.getProperty("file.separator");
-		String srcFolder = productHomeDir + fileSeparator + "src\\main\\java" + fileSeparator;
+		String srcFolder = productHomeDir + fileSeparator + "src"+File.separator+"main"+File.separator+"java" + fileSeparator;
 		
 		if(!new File(srcFolder).exists())
 			srcFolder = srcFolder.replaceAll("src", "classes");
@@ -329,7 +329,7 @@ public class DriverScript {
 		File[] files = d.listFiles(File::isFile);
 		for(File f: files ) {
 			String key = f.getName().replace(".java", "").replace(".class", "");
-			String value = f.getPath().replace(srcFolder, "").replace(System.getProperty("file.separator"), ".").replace(".java", "").replace(".class", "");
+			String value = f.getPath().replace(srcFolder, "").replace(File.separator, ".").replace(".java", "").replace(".class", "");
 			testClasses.put(key, value);
 		}
 	}
